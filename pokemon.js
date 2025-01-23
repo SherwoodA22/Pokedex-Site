@@ -1,8 +1,9 @@
-const MAX_POKEMON = 1025
+const MAX_POKEMON = 130;
 const listWrapper = document.querySelector(".list-wrapper");
 const searchInput = document.querySelector("#search-input");
 const numberFilter = document.querySelector("#number");
 const nameFilter = document.querySelector("#name");
+const typeFilter = document.querySelector("#type");
 const notFoundMessage = document.querySelector("#not-found-message");
 
 let allPokemons = [];
@@ -12,6 +13,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
 .then((data) => {
     allPokemons = data.results;
     displayPokemon(allPokemons);
+    console.log(data.results);
 });
 
 //Fetching the pokemon names and ids from the PokeApi.
@@ -20,9 +22,9 @@ async function fetchPokemonDataBeforeRedirect(id) {
         const [pokemon, pokemonSpecies] = await Promise.all([fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((result) => {
             result.json();
         }),
-        fetch(`https://pokeapi.co/api/v1/pokemon-species/${id}`).then((result) => {
-            result.json();
-        }),
+        // fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((result) => {
+        //     result.json();
+        // }),
     ])
     return true;
    } catch(error) {
@@ -61,3 +63,35 @@ function displayPokemon(pokemon) {
         listWrapper.appendChild(listItem);
     });
 }
+
+searchInput.addEventListener("keyup", handleSearch);
+
+function handleSearch() {
+    const searchTerm = searchInput.value.toLowerCase();
+    let filteredPokemon;
+
+    if(numberFilter.checked) {
+        filteredPokemon = allPokemons.filter((pokemon) => {
+            const pokemonID = pokemon.url.split("/")[6];
+            return pokemonID.startsWith(searchTerm);
+        });
+    } else if(nameFilter.checked) {
+        filteredPokemon = allPokemons.filter((pokemon) => {
+            return pokemon.name.toLowerCase().startsWith(searchTerm);
+        });
+        
+    } else if(typeFilter.checked) {
+        filteredPokemon = allPokemons.filter((pokemon) => {
+            return pokemon.types[0].type.toLowerCase().startsWith(searchTerm);
+        });
+    } else {
+        filteredPokemon = allPokemons;
+    }
+    displayPokemon(filteredPokemon);
+
+    if(filteredPokemon.length === 0) {
+        notFoundMessage.style.display = "block";
+    }else{
+        notFoundMessage.style.display = "none";
+    }
+ }
