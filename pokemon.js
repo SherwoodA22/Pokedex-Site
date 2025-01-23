@@ -1,9 +1,8 @@
-const MAX_POKEMON = 130;
+const MAX_POKEMON = 1025;
 const listWrapper = document.querySelector(".list-wrapper");
 const searchInput = document.querySelector("#search-input");
 const numberFilter = document.querySelector("#number");
 const nameFilter = document.querySelector("#name");
-const typeFilter = document.querySelector("#type");
 const notFoundMessage = document.querySelector("#not-found-message");
 
 let allPokemons = [];
@@ -22,10 +21,10 @@ async function fetchPokemonDataBeforeRedirect(id) {
         const [pokemon, pokemonSpecies] = await Promise.all([fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((result) => {
             result.json();
         }),
-        // fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((result) => {
-        //     result.json();
-        // }),
-    ])
+        fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((result) => {
+            result.json();
+        }),
+    ]);
     return true;
    } catch(error) {
         console.error("Failed to Fetch Pokemon");
@@ -54,9 +53,9 @@ function displayPokemon(pokemon) {
 
         //Will change to the individual pokemon's details page on click.
         listItem.addEventListener("click", async () => {
-            const success = await fetchPokemonDataBeforeRedirect(pokemonId);
+            const success = await fetchPokemonDataBeforeRedirect(pokemonID);
             if(success){
-                window.location.href = `./detail/html?id=${pokemonID}`;
+                window.location.href = `./detail.html?id=${pokemonID}`;
             }
         });
 
@@ -94,4 +93,13 @@ function handleSearch() {
     }else{
         notFoundMessage.style.display = "none";
     }
+ }
+
+ const closeButton = document.querySelector(".search-close-icon");
+ closeButton.addEventListener("click", clearSearch);
+
+ function clearSearch() {
+    searchInput.value = "";
+    displayPokemon(allPokemons);
+    notFoundMessage.style.display = "none";
  }
