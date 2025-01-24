@@ -69,20 +69,21 @@ function handleSearch() {
     const searchTerm = searchInput.value.toLowerCase();
     let filteredPokemon;
 
+    //Searches Pokemon by id if the search is set to Number.
+    //Allows for partial matches to come up. Ex Char gets Charmander and Charizard.
     if(numberFilter.checked) {
         filteredPokemon = allPokemons.filter((pokemon) => {
             const pokemonID = pokemon.url.split("/")[6];
             return pokemonID.startsWith(searchTerm);
         });
+
+    //Searches Pokemon by name if search is set to Number.
+    //Allows for partial matches to come up. Ex 1 gets both 1 and 10.
     } else if(nameFilter.checked) {
         filteredPokemon = allPokemons.filter((pokemon) => {
             return pokemon.name.toLowerCase().startsWith(searchTerm);
         });
         
-    } else if(typeFilter.checked) {
-        filteredPokemon = allPokemons.filter((pokemon) => {
-            return pokemon.types[0].type.toLowerCase().startsWith(searchTerm);
-        });
     } else {
         filteredPokemon = allPokemons;
     }
@@ -95,9 +96,11 @@ function handleSearch() {
     }
  }
 
+ 
  const closeButton = document.querySelector(".search-close-icon");
  closeButton.addEventListener("click", clearSearch);
 
+ //Handles clearing the search bar.
  function clearSearch() {
     searchInput.value = "";
     displayPokemon(allPokemons);
