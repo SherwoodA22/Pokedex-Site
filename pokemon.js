@@ -40,14 +40,14 @@ function displayPokemon(pokemon) {
         const listItem = document.createElement("div");
         listItem.className = "list-item";
         listItem.innerHTML = `
-        <div class="number-wrape">
+        <div class="number-wrap">
             <p class="caption-fonts">#${pokemonID}</p>
         </div>
-         <div class="img-wrape">
+         <div class="img-wrap">
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" alt="${pokemon.name}"/>
         </div>
-         <div class="name-wrape">
-            <p class="body3-fonts">#${pokemon.name}</p>
+         <div class="name-wrap">
+            <p class="body3-fonts">${pokemon.name}</p>
         </div>
         `;
 
