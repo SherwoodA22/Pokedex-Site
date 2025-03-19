@@ -1,10 +1,10 @@
 :root {
-  --identity-primary: #dc0a2d;
+  --identity-primary: rgb(150,0,0);
 
-  --grayscale-dark: #212121;
-  --grayscale-medium: #666666;
-  --grayscale-light: #e0e0e0;
-  --grayscale-background: #efefef;
+  --grayscale-dark: white;
+  --grayscale-medium: red;
+  --grayscale-light: red;
+  --grayscale-background: rgb(150,0,0);
   --grayscale-white: #ffffff;
 
   --headline-font-size: 24px;
@@ -19,13 +19,6 @@
   --headline-line-height: 32px;
   --common-line-height: 16px;
   --caption-line-height: 12px;
-
-  --font-weight-regular: 400;
-  --font-weight-bold: 700;
-
-  --drop-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.2);
-  --drop-shadow-hover: 0px 3px 12px 3px rgba(0, 0, 0, 0.2);
-  --drop-shadow-inner: 0px 1px 3px 1px rgba(0, 0, 0, 0.25) inset;
 }
 
 h2,
@@ -130,12 +123,9 @@ body {
 }
 
 .search-wrap {
-  position: relative;
   background-color: var(--grayscale-white);
   border-radius: 16px;
-  box-shadow: var(--drop-shadow-inner);
   height: 32px;
-  gap: 8px;
 }
 
 .search-icon {
@@ -294,17 +284,9 @@ body {
 
 
 /* detail page */
-
-.detail-main .header {
-  padding: 20px 20px 24px 20px;
-  position: relative;
-  z-index: 2;
-}
-
 .detail-main .header-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   column-gap: 15px;
 }
 
@@ -314,9 +296,6 @@ body {
   column-gap: 8px;
 }
 
-.detail-main .back-btn-wrap {
-  max-height: 32px;
-}
 
 .detail-main .back-btn-wrap path,
 .detail-main .header-wrapper p,
@@ -329,13 +308,6 @@ body {
   font-weight: var(--font-weight-bold);
 }
 
-.detail-img-wrapper {
-  width: 200px;
-  height: 200px;
-  margin: auto;
-  position: relative;
-  z-index: 3;
-}
 
 .detail-img-wrapper img {
   width: 100%;
@@ -345,13 +317,10 @@ body {
 .detail-card-detail-wrapper {
   border-radius: 8px;
   background-color: var(--grayscale-white);
-  box-shadow: var(--drop-shadow-inner);
   padding: 56px 20px 20px 20px;
   margin-top: -50px;
   display: flex;
   flex-direction: column;
-  position: relative;
-  z-index: 2;
 }
 
 .power-wrapper {
@@ -368,13 +337,10 @@ body {
   font-weight: var(--font-weight-bold);
   color: var(--grayscale-white);
   text-transform: capitalize;
-  background-color: #74cb48;
+
 }
 
-.pokemon-detail.move p {
-  text-transform: capitalize;
-  word-break: break-all;
-}
+
 
 .list-item .name-wrap p {
   text-transform: capitalize;
@@ -394,18 +360,6 @@ body {
   flex: 1;
   text-align: center;
   position: relative;
-}
-
-.pokemon-detail-wrap:before {
-  content: "";
-  background-color: var(--grayscale-light);
-  width: 1px;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
 }
 
 .pokemon-detail-wrap:last-child::before {
@@ -455,13 +409,6 @@ body {
   min-width: 19px;
 }
 
-.stats-wrap p.stats {
-  text-align: right;
-  padding-right: 8px;
-  min-width: 35px;
-  border-right: 1px solid var(--grayscale-light);
-  font-weight: var(--font-weight-bold);
-}
 
 .stats-wrap .progress-bar {
   flex: 1;
@@ -478,16 +425,12 @@ body {
 }
 
 .detail-bg {
-  position: absolute;
   z-index: 1;
   right: 8px;
   top: 8px;
-  opacity: 0.1;
 }
 
-.detail-bg path {
-  fill: var(--grayscale-white);
-}
+
 
 div#not-found-message {
   display: none;
